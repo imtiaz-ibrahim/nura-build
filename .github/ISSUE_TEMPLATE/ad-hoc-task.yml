@@ -1,0 +1,60 @@
+name: Ad-hoc Task
+description: Create an issue for anything that is not a Build Manual step — a bug, a decision, a research task, a one-off.
+title: ""
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for anything that is not a Build Manual step.
+        For Build Manual steps, use the "NURA Build Step" template instead.
+
+  - type: dropdown
+    id: task-type
+    attributes:
+      label: Task type
+      options:
+        - Bug
+        - Decision needed
+        - Research
+        - Documentation
+        - One-off task
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What is this task? What does done look like?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: build-worker
+    attributes:
+      label: Build worker
+      description: Who or what executes this? (Optional for decisions and research.)
+      options:
+        - founder
+        - technical-partner
+        - claude
+        - claude-code
+        - codex
+        - chatgpt
+        - n8n
+        - supabase
+        - paperclip-lab
+        - hermes-lab
+        - Not yet assigned
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes or context
+      description: Anything else worth knowing — links, screenshots, prior conversation references.
+    validations:
+      required: false

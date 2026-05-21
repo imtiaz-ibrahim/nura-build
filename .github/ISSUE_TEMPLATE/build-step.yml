@@ -1,0 +1,130 @@
+name: NURA Build Step
+description: Create an issue for a step from the NURA / DINA Build Manual.
+title: "[Step X.X] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for any step from the NURA / DINA Build Manual.
+        Fill every field. If a field doesn't apply, write "None" or "N/A".
+
+  - type: input
+    id: manual-step
+    attributes:
+      label: Manual step reference
+      description: Which Build Manual step does this issue execute? (e.g. "Part 2, Step 2.3")
+      placeholder: "Part X, Step X.X"
+    validations:
+      required: true
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What does this step deliver? One or two sentences.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: build-worker
+    attributes:
+      label: Build worker to use
+      description: Which worker executes this step?
+      options:
+        - founder
+        - technical-partner
+        - claude
+        - claude-code
+        - codex
+        - chatgpt
+        - n8n
+        - supabase
+        - paperclip-lab
+        - hermes-lab
+    validations:
+      required: true
+
+  - type: input
+    id: skill
+    attributes:
+      label: Skill to use
+      description: Which NURA skill (or framework skill) applies?
+      placeholder: "e.g. nura-workflow-builder, nura-source-truth-guardian"
+    validations:
+      required: true
+
+  - type: input
+    id: mcp
+    attributes:
+      label: MCP or integration needed
+      description: Which MCP or integration does this step require? Write "None" if not applicable.
+      placeholder: "e.g. Supabase MCP, GitHub MCP, None"
+    validations:
+      required: true
+
+  - type: textarea
+    id: source-context
+    attributes:
+      label: Source context to provide
+      description: Which source pack files, prior steps, or other context must the worker have?
+    validations:
+      required: true
+
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Prompt to paste
+      description: The exact prompt the worker should receive. Copy verbatim from the Build Manual where one is provided.
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-output
+    attributes:
+      label: Expected output
+      description: What artifact, file, or behaviour should exist when this step is complete?
+    validations:
+      required: true
+
+  - type: textarea
+    id: founder-approval
+    attributes:
+      label: Founder approval checkpoint
+      description: What must the founder personally check before this step is marked done?
+    validations:
+      required: true
+
+  - type: textarea
+    id: test
+    attributes:
+      label: Test to run
+      description: The specific test that proves this step works.
+    validations:
+      required: true
+
+  - type: textarea
+    id: success
+    attributes:
+      label: Success looks like
+      description: A one or two sentence description of the working end state.
+    validations:
+      required: true
+
+  - type: textarea
+    id: if-fails
+    attributes:
+      label: If it fails
+      description: What to do if the test fails or the output is wrong.
+    validations:
+      required: true
+
+  - type: input
+    id: next-step
+    attributes:
+      label: Next step
+      description: Which Build Manual step comes after this one?
+      placeholder: "e.g. Part 2, Step 2.4"
+    validations:
+      required: true
