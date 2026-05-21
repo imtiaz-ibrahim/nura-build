@@ -1,6 +1,5 @@
 name: Ad-hoc Task
 description: Create an issue for anything that is not a Build Manual step — a bug, a decision, a research task, a one-off.
-title: ""
 labels: []
 body:
   - type: markdown
