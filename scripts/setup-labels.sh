@@ -40,12 +40,12 @@ gh label create "part-9-testing-demo" -R "$REPO" -c "$PHASE_COLOR" -d "Part 9 �
 gh label create "part-10-paperclip-lab" -R "$REPO" -c "$PHASE_COLOR" -d "Part 10 — Paperclip lab scope, tests and adoption criteria." --force
 gh label create "part-11-hermes-lab" -R "$REPO" -c "$PHASE_COLOR" -d "Part 11 — Hermes lab scope, tests and adoption criteria." --force
 gh label create "part-12-gtm" -R "$REPO" -c "$PHASE_COLOR" -d "Part 12 — GTM execution setup (paid audit tracker, pipeline, Kael draft workflow)." --force
-gh label create "part-13-persona-production" -R "$REPO" -c "$PHASE_COLOR" -d "Part 13 — NURA Persona Production. Deferred placeholder; not in use until Phase 1 build is stable and locked Step 8 conditions are met." --force
+gh label create "part-13-persona-production" -R "$REPO" -c "$PHASE_COLOR" -d "Part 13 — NURA Persona Production. Deferred until Phase 1 is stable and Step 8 locked." --force
 
 echo "Creating state labels..."
 gh label create "needs-founder-approval" -R "$REPO" -c "$STATE_APPROVAL" -d "Task or output is waiting on a founder decision before it can move forward." --force
 gh label create "blocked" -R "$REPO" -c "$STATE_BLOCKED" -d "Task cannot progress until a dependency, decision, or external input is resolved." --force
-gh label create "security-review" -R "$REPO" -c "$STATE_SECURITY" -d "Task touches credentials, permissions, customer data, RLS, production or external actions and requires nura-security-approval-guardrail." --force
+gh label create "security-review" -R "$REPO" -c "$STATE_SECURITY" -d "Credentials, data, RLS, prod or external actions; requires nura-security-approval-guardrail." --force
 gh label create "source-truth-review" -R "$REPO" -c "$STATE_SOURCETRUTH" -d "Task output must pass nura-source-truth-guardian review before it is locked, approved or committed." --force
 
 echo ""
