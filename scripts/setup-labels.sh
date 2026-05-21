@@ -49,5 +49,5 @@ gh label create "security-review" -R "$REPO" -c "$STATE_SECURITY" -d "Task touch
 gh label create "source-truth-review" -R "$REPO" -c "$STATE_SOURCETRUTH" -d "Task output must pass nura-source-truth-guardian review before it is locked, approved or committed." --force
 
 echo ""
-echo "Done. 28 labels created on $REPO."
+echo "Done. 27 labels created on $REPO."
 echo "Verify at: https://github.com/$REPO/labels"
