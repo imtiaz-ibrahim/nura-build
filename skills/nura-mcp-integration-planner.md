@@ -591,3 +591,27 @@ This skill can be used in three places:
 - **ChatGPT Projects or other AI tools** — upload this file as project knowledge / a reference document.
 
 The filename `nura-mcp-integration-planner.md` matches the skill name in the YAML frontmatter.
+
+## Notes on --scope local behavior
+
+Operational notes from real MCP installations. Append new findings here as they're discovered.
+
+### `claude mcp add --scope local` writes to `~/.claude.json`, not to a repo-local file
+
+**Discovered:** 2026-05-22, during `supabase-nura-dev` installation.
+
+**Behavior:** Running `claude mcp add <name> --scope local -- <command>` writes the server configuration to `~/.claude.json` under a per-project keyed section (keyed by absolute repo path), **not** to `.claude/settings.local.json` inside the repo. The flag name `--scope local` suggests a repo-local file, but the actual file is in the user's home directory.
+
+**Security impact: net positive.**
+
+- The config file is outside the repo entirely — no git exposure risk, no `.gitignore` rule needed.
+- Project-keyed activation is preserved: the MCP server only activates when Claude Code is launched from the specific repo path that was the cwd at registration time.
+
+**Updated guidance for future `--scope local` MCP installations:**
+
+- Predict the config landing at `~/.claude.json` (under the per-project key for the current repo path). Do not expect a repo-local file (`.claude/settings.local.json` or similar) to be created.
+- Skip the `.gitignore` step that would otherwise be planned for `.claude/settings.local.json` — there is no such file to ignore.
+- Token storage decision is unchanged regardless of where the config lands: prefer shell env vars (e.g., `~/.zshrc` export) over passing secrets via `--env`. The MCP server child process inherits env vars from the Claude Code parent process at launch.
+- Verification command remains useful: `grep -c '<secret-prefix>' ~/.claude.json` should return 0 to confirm no token value leaked into the config file.
+
+**Cross-reference:** see `docs/mcp-tokens.md` for the `supabase-nura-dev` entry this note was derived from, and for the broader MCP token inventory and rotation policy.
