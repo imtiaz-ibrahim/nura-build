@@ -73,3 +73,77 @@ Placeholder for additional MCP server credentials (e.g., n8n, etc.). Each new en
 - **Rotation history** — dated entries for every rotation and the reason
 - **Enforcement** — server-level flags, config location, scope decision, auth method
 - **Verify config** — one-liner confirming the secret value is absent from on-disk configs
+
+---
+
+## Git authentication — SSH (no rotating credential)
+
+**Decision date:** 2026-05-22
+**Method:** SSH key authentication via `~/.ssh/id_ed25519_nura`
+**Why:** Sustainable. No 90-day rotation. Public key on GitHub, private key on Mac only. Standard practice.
+
+### Key details
+- **Type:** Ed25519
+- **Location:** `~/.ssh/id_ed25519_nura` (private), `~/.ssh/id_ed25519_nura.pub` (public)
+- **Passphrase:** None (deliberate decision — see trade-off below)
+- **Public key registered:** GitHub account `imtiaz-ibrahim` as "MacBook Pro - nura-build - 2026-05"
+- **Network workaround:** Port 22 blocked on local network. Config routes `github.com` → `ssh.github.com:443` automatically.
+
+### SSH config location
+`~/.ssh/config` (permissions 600). Specifies host, port 443, identity file.
+
+### No-passphrase trade-off (acknowledged 2026-05-22)
+A no-passphrase private key means anyone with access to this Mac can push to NURA repos. Acceptable for now because:
+- Solo founder on one personally-controlled Mac
+- Key only authorises git operations (no Supabase prod, no customer data)
+- Mac is FileVault-encrypted with login password
+
+### Revisit conditions
+Passphrase MUST be added before any of:
+- Real customer HR data exists in a Supabase project this Mac can push to
+- This Mac is used outside controlled environments (travel, public networks)
+- Anyone else gains access to this Mac (partner, engineer, contractor)
+- Tier 3 engineer review (final check before customer 1)
+
+### Rotation
+None required. SSH keys do not expire. Replace only if Mac is compromised, lost, or replaced.
+
+### Revocation
+If compromised: delete the corresponding key entry at https://github.com/settings/keys
+
+---
+
+## Git authentication — SSH (no rotating credential)
+
+**Decision date:** 2026-05-22
+**Method:** SSH key authentication via `~/.ssh/id_ed25519_nura`
+**Why:** Sustainable. No 90-day rotation. Public key on GitHub, private key on Mac only. Standard practice.
+
+### Key details
+- **Type:** Ed25519
+- **Location:** `~/.ssh/id_ed25519_nura` (private), `~/.ssh/id_ed25519_nura.pub` (public)
+- **Passphrase:** None (deliberate decision — see trade-off below)
+- **Public key registered:** GitHub account `imtiaz-ibrahim` as "MacBook Pro - nura-build - 2026-05"
+- **Network workaround:** Port 22 blocked on local network. Config routes `github.com` → `ssh.github.com:443` automatically.
+
+### SSH config location
+`~/.ssh/config` (permissions 600). Specifies host, port 443, identity file.
+
+### No-passphrase trade-off (acknowledged 2026-05-22)
+A no-passphrase private key means anyone with access to this Mac can push to NURA repos. Acceptable for now because:
+- Solo founder on one personally-controlled Mac
+- Key only authorises git operations (no Supabase prod, no customer data)
+- Mac is FileVault-encrypted with login password
+
+### Revisit conditions
+Passphrase MUST be added before any of:
+- Real customer HR data exists in a Supabase project this Mac can push to
+- This Mac is used outside controlled environments (travel, public networks)
+- Anyone else gains access to this Mac (partner, engineer, contractor)
+- Tier 3 engineer review (final check before customer 1)
+
+### Rotation
+None required. SSH keys do not expire. Replace only if Mac is compromised, lost, or replaced.
+
+### Revocation
+If compromised: delete the corresponding key entry at https://github.com/settings/keys
